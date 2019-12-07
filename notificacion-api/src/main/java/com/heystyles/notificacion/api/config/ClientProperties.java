@@ -14,9 +14,20 @@ public class ClientProperties {
     @NotNull
     private String seguridadUrlBase;
 
+    @NotNull
+    private String usuariosUrlBase;
+
     private int connectionTimeout;
 
     private int readTimeout;
+
+    public String getUsuariosUrlBase() {
+        return usuariosUrlBase;
+    }
+
+    public void setUsuariosUrlBase(String usuariosUrlBase) {
+        this.usuariosUrlBase = usuariosUrlBase;
+    }
 
     public String getSeguridadUrlBase() {
         return seguridadUrlBase;
