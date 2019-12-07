@@ -25,7 +25,7 @@ public class ClientConfig {
     }
 
     @Bean
-    public CargoClient cargoClient(RestTemplate restTemplate){
+    public CargoClient cargoClient(RestTemplate restTemplate) {
         return new CargoClienteImpl(clientProperties.getUsuariosUrlBase(), restTemplate);
     }
 }
