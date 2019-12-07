@@ -12,7 +12,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <start-class>com.heystyles.producto.api.NotificacionApp</start-class>
+        <start-class>com.heystyles.notificacion.api.NotificacionApp</start-class>
     </properties>
 
 
