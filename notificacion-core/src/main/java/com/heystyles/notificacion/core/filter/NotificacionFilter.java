@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class NotificacionFilter extends Filter {
 
-    private Long cargoId;
+    private Long usuarioId;
     private Estado estado;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -19,12 +19,12 @@ public class NotificacionFilter extends Filter {
 
     private Boolean fechaAscending;
 
-    public Long getCargoId() {
-        return cargoId;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setCargoId(Long cargoId) {
-        this.cargoId = cargoId;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public Estado getEstado() {

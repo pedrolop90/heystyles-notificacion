@@ -32,7 +32,7 @@ public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implemen
     public interface Attributes extends AuditableWithAuthorEntity.Attributes {
         String ESTADO = "estado";
         String NOMBRE = "nombre";
-        String CARGO = "cargo";
+        String USUARIO_ID = "usuarioId";
     }
 
     @Id
@@ -40,8 +40,8 @@ public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implemen
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "id_cargo", nullable = false)
-    private Long cargoId;
+    @Column(name = "id_usuario", nullable = false)
+    private Long usuarioId;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -85,12 +85,12 @@ public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implemen
         this.id = id;
     }
 
-    public Long getCargoId() {
-        return cargoId;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setCargoId(Long cargoId) {
-        this.cargoId = cargoId;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getNombre() {

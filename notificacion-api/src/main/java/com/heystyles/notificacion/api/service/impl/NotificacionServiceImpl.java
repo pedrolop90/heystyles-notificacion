@@ -8,8 +8,7 @@ import com.heystyles.notificacion.api.entity.NotificacionEntity;
 import com.heystyles.notificacion.api.message.MessageKeys;
 import com.heystyles.notificacion.api.service.NotificacionService;
 import com.heystyles.notificacion.core.domain.Notificacion;
-import com.heystyles.notificacion.core.domain.NotificacionDto;
-import com.heystyles.notificacion.core.dto.NotificacionDtoListResponse;
+import com.heystyles.notificacion.core.dto.NotificacionListResponse;
 import com.heystyles.notificacion.core.filter.NotificacionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -35,7 +34,7 @@ public class NotificacionServiceImpl
     }
 
     @Override
-    public NotificacionDto getNotificacion(Long notificacionId) {
+    public Notificacion getNotificacion(Long notificacionId) {
         NotificacionEntity notificacionEntity = Optional.ofNullable(notificacionDao.findOne(notificacionId))
                 .orElseThrow(() -> APIExceptions.objetoNoEncontrado(
                         messageSource.getMessage(
@@ -44,16 +43,16 @@ public class NotificacionServiceImpl
                                 getLocale()
                         )
                 ));
-        return getConverterService().convertTo(notificacionEntity, NotificacionDto.class);
+        return getConverterService().convertTo(notificacionEntity, Notificacion.class);
     }
 
     @Override
-    public NotificacionDtoListResponse getFilter(NotificacionFilter filter) {
+    public NotificacionListResponse getFilter(NotificacionFilter filter) {
         filter = Optional.ofNullable(filter).orElse(new NotificacionFilter());
         Page<NotificacionEntity> page = notificacionDao.getPage(filter);
-        return new NotificacionDtoListResponse(
+        return new NotificacionListResponse(
                 page.getTotalElements(),
-                getConverterService().convertTo(page.getContent(), NotificacionDto.class)
+                getConverterService().convertTo(page.getContent(), Notificacion.class)
         );
     }
 }

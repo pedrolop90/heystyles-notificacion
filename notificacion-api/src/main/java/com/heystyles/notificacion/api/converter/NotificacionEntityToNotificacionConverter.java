@@ -15,7 +15,7 @@ implements Converter<NotificacionEntity, Notificacion> {
         bean.setId(entity.getId());
         bean.setNombre(entity.getNombre());
         bean.setDescripcion(entity.getDescripcion());
-        bean.setCargoId(entity.getCargoId());
+        bean.setUsuarioId(entity.getUsuarioId());
         bean.setEstado(entity.getEstado());
         return bean;
     }

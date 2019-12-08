@@ -7,7 +7,7 @@ import com.heystyles.common.types.DomainBean;
 public class Notificacion extends DomainBean<Long> {
 
     private Long id;
-    private Long cargoId;
+    private Long usuarioId;
     private String nombre;
     private String descripcion;
     private NotificacionEstado estado;
@@ -22,12 +22,12 @@ public class Notificacion extends DomainBean<Long> {
         this.id = id;
     }
 
-    public Long getCargoId() {
-        return cargoId;
+    public Long getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setCargoId(Long cargoId) {
-        this.cargoId = cargoId;
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     public String getNombre() {

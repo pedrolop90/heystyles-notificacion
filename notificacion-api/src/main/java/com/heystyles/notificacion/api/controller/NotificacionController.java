@@ -5,8 +5,8 @@ import com.heystyles.common.types.BaseResponse;
 import com.heystyles.common.types.IdResponse;
 import com.heystyles.notificacion.api.service.NotificacionService;
 import com.heystyles.notificacion.core.domain.Notificacion;
-import com.heystyles.notificacion.core.dto.NotificacionDtoListResponse;
-import com.heystyles.notificacion.core.dto.NotificacionDtoResponse;
+import com.heystyles.notificacion.core.dto.NotificacionListResponse;
+import com.heystyles.notificacion.core.dto.NotificacionResponse;
 import com.heystyles.notificacion.core.filter.NotificacionFilter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -76,9 +76,9 @@ public class NotificacionController {
             @ApiResponse(code = 404, message = "Notificacion no encontrada.")
     })
     @GetMapping(value = "/{notificacionId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NotificacionDtoResponse> getNotificacion(
+    public ResponseEntity<NotificacionResponse> getNotificacion(
             @NotNull @PathVariable(name = "notificacionId") Long lugarId) {
-        return Responses.responseEntity(new NotificacionDtoResponse(notificacionService.getNotificacion(lugarId)));
+        return Responses.responseEntity(new NotificacionResponse(notificacionService.getNotificacion(lugarId)));
     }
 
     @ApiOperation(value = "Permite Listar todos las Notificacion de la base de datos, dado un filtro.")
@@ -87,7 +87,7 @@ public class NotificacionController {
             @ApiResponse(code = 404, message = "Notificaciones no encontradas.")
     })
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NotificacionDtoListResponse> getNotificaciones(NotificacionFilter filter) {
+    public ResponseEntity<NotificacionListResponse> getNotificaciones(NotificacionFilter filter) {
         return Responses.responseEntity(notificacionService.getFilter(filter));
     }
 

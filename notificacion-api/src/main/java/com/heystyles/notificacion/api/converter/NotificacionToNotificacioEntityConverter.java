@@ -42,7 +42,7 @@ public class NotificacionToNotificacioEntityConverter
         }
         entity.setNombre(bean.getNombre());
         entity.setDescripcion(bean.getDescripcion());
-        entity.setCargoId(bean.getCargoId());
+        entity.setUsuarioId(bean.getUsuarioId());
         entity.setEstado(bean.getEstado());
         return entity;
     }

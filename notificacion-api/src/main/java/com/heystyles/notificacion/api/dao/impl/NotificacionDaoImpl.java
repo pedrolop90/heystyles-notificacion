@@ -45,8 +45,8 @@ public class NotificacionDaoImpl implements NotificacionCustomDao {
     }
 
     private void applyWhere(Criteria criteria, NotificacionFilter filter) {
-        if (filter.getCargoId() != null) {
-            criteria.add(Restrictions.eq(NotificacionEntity.Attributes.CARGO, filter.getCargoId()));
+        if (filter.getUsuarioId() != null) {
+            criteria.add(Restrictions.eq(NotificacionEntity.Attributes.USUARIO_ID, filter.getUsuarioId()));
         }
         if (filter.getEstado() != null) {
             criteria.add(Restrictions.eq(NotificacionEntity.Attributes.ESTADO, filter.getEstado()));
