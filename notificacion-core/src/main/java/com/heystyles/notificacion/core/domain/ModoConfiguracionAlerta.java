@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.heystyles.common.exception.InvalidEnumValueException;
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
-public enum NotificacionEstado {
+public enum ModoConfiguracionAlerta {
 
-    SIN_LEER, LEIDO;
+    DESDE, HASTA, CADA_CUANTO;
 
     @JsonValue
     public String getValue() {
@@ -16,16 +16,16 @@ public enum NotificacionEstado {
     }
 
     @JsonCreator
-    public static NotificacionEstado fromValue(String value) {
+    public static ModoConfiguracionAlerta fromValue(String value) {
         if (value != null && value.isEmpty()) {
             return null;
         }
-        for (NotificacionEstado p : values()) {
+        for (ModoConfiguracionAlerta p : values()) {
             if (p.name().equals(value)) {
                 return p;
             }
         }
-        throw new InvalidEnumValueException("NotificacionEstado", value);
+        throw new InvalidEnumValueException("ModoConfiguracionAlerta", value);
     }
 
 }

@@ -2,8 +2,8 @@ package com.heystyles.notificacion.api.entity;
 
 import com.heystyles.common.persistence.LocalDateTimeAttributeConverter;
 import com.heystyles.common.types.AuditableWithAuthorEntity;
+import com.heystyles.common.types.Estado;
 import com.heystyles.common.types.SoftDeletable;
-import com.heystyles.notificacion.core.domain.NotificacionEstado;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,26 +13,28 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "NOTIFICACION")
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@Where(clause = "S_DELETE = 0")
-public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implements SoftDeletable {
+@Where(clause = "s_delete = 0")
+public abstract class ConfiguracionAlertaPadreEntity
+        extends AuditableWithAuthorEntity<Long>
+        implements SoftDeletable, ConfiguracionAlertaPadreAbstract {
 
     public interface Attributes extends AuditableWithAuthorEntity.Attributes {
-        String ESTADO = "estado";
-        String NOMBRE = "nombre";
-        String USUARIO_ID = "usuarioId";
+        String CONFIGURACION_ALERTA = "configuracionAlerta";
+        String CONFIGURACION_ALERTA_ID = CONFIGURACION_ALERTA + "." + ConfiguracionAlertaEntity.Attributes.ID;
     }
 
     @Id
@@ -40,18 +42,13 @@ public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implemen
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "id_usuario", nullable = false)
-    private Long usuarioId;
-
-    @Column(name = "nombre", nullable = false)
-    private String nombre;
-
-    @Column(name = "descripcion", nullable = false)
-    private String descripcion;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_configuracion_alerta", nullable = false)
+    private ConfiguracionAlertaEntity configuracionAlerta;
 
     @Column(name = "estado")
     @Enumerated(value = EnumType.STRING)
-    private NotificacionEstado estado;
+    private Estado estado;
 
     @Column(name = "s_delete", nullable = false)
     private boolean delete;
@@ -84,35 +81,19 @@ public class NotificacionEntity extends AuditableWithAuthorEntity<Long> implemen
         this.id = id;
     }
 
-    public Long getUsuarioId() {
-        return usuarioId;
+    public ConfiguracionAlertaEntity getConfiguracionAlerta() {
+        return configuracionAlerta;
     }
 
-    public void setUsuarioId(Long usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setConfiguracionAlerta(ConfiguracionAlertaEntity configuracionAlerta) {
+        this.configuracionAlerta = configuracionAlerta;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public NotificacionEstado getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(NotificacionEstado estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
