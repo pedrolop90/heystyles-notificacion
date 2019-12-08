@@ -26,6 +26,12 @@
         <dependency>
             <groupId>com.heystyles</groupId>
             <artifactId>notificacion-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.heystyles</groupId>
+                    <artifactId>notificacion-api</artifactId>
+                </exclusion>
+            </exclusions>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 

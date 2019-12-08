@@ -4,25 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.heystyles.common.exception.InvalidEnumValueException;
-import com.heystyles.notificacion.api.service.ConfiguracionAlertaFacturaService;
-import com.heystyles.notificacion.api.service.ConfiguracionAlertaPadreService;
-import com.heystyles.notificacion.api.service.ConfiguracionAlertaProductoService;
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum TipoConfiguracionAlerta {
 
-    FACTURA(ConfiguracionAlertaFacturaService.class),
-    PRODUCTO(ConfiguracionAlertaProductoService.class);
-
-    private Class<? extends ConfiguracionAlertaPadreService> serviceClass;
-
-    TipoConfiguracionAlerta(Class<? extends ConfiguracionAlertaPadreService> serviceClass) {
-        this.serviceClass = serviceClass;
-    }
-
-    public Class<? extends ConfiguracionAlertaPadreService> getServiceClass() {
-        return serviceClass;
-    }
+    FACTURA, PRODUCTO;
 
     @JsonValue
     public String getValue() {
