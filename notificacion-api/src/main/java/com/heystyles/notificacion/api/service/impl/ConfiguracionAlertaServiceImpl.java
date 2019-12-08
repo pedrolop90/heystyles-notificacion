@@ -10,6 +10,7 @@ import com.heystyles.notificacion.core.domain.ConfiguracionAlerta;
 import com.heystyles.notificacion.core.domain.ConfiguracionAlertaRequest;
 import com.heystyles.notificacion.core.domain.TipoConfiguracionAlerta;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -24,10 +25,7 @@ public class ConfiguracionAlertaServiceImpl
     private ConfiguracionAlertaDao configuracionAlertaDao;
 
     @Autowired
-    private ConfiguracionAlertaFacturaService configuracionAlertaFacturaService;
-
-    @Autowired
-    private ConfiguracionAlertaProductoService configuracionAlertaProductoService;
+    private ApplicationContext context;
 
     @Override
     protected ConfiguracionAlertaDao getDao() {
@@ -42,19 +40,25 @@ public class ConfiguracionAlertaServiceImpl
         if (configuracionAlertas == null) {
             return;
         }
+        context.getBean(tipo.getServiceClass()).upsert(tipo, tablaRelacionadaId, configuracionAlertas);
+        /*
         configuracionAlertaFacturaService.upsert(tipo, tablaRelacionadaId, configuracionAlertas);
         configuracionAlertaProductoService.upsert(tipo, tablaRelacionadaId, configuracionAlertas);
+        */
     }
 
     @Override
     public List<ConfiguracionAlerta> findByTipoConfiguracionAlertaAndTablaRelacionadaId(
             TipoConfiguracionAlerta tipo, Long tablaRelacionadaId) {
+        return context.getBean(tipo.getServiceClass()).findConfiguracionAlertaByTablaRelacionadaId(tablaRelacionadaId);
+        /*
         if (tipo.compareTo(TipoConfiguracionAlerta.FACTURA) == 0) {
             return configuracionAlertaFacturaService.findConfiguracionAlertaByTablaRelacionadaId(tablaRelacionadaId);
         }
         else {
             return configuracionAlertaProductoService.findConfiguracionAlertaByTablaRelacionadaId(tablaRelacionadaId);
         }
+         */
     }
 
     @Override
